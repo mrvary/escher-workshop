@@ -1,4 +1,4 @@
-module Box exposing (Box, flipBox, moveVertically, scaleVertically, splitVertically, tossBox, turnBox)
+module Box exposing (Box, flipBox, moveHorizontally, moveVertically, scaleHorizontally, scaleVertically, splitHorizontally, splitVertically, tossBox, turnBox)
 
 import Vector exposing (..)
 
@@ -71,3 +71,31 @@ splitVertically f box =
             box |> scaleVertically (1 - f)
     in
     ( top, bot )
+
+
+moveHorizontally : Float -> Box -> Box
+moveHorizontally f { a, b, c } =
+    { a = add a (scale f b)
+    , b = b
+    , c = c
+    }
+
+
+scaleHorizontally : Float -> Box -> Box
+scaleHorizontally f { a, b, c } =
+    { a = a
+    , b = scale f b
+    , c = c
+    }
+
+
+splitHorizontally : Float -> Box -> ( Box, Box )
+splitHorizontally f box =
+    let
+        left =
+            box |> scaleHorizontally (1 - f)
+
+        right =
+            box |> moveHorizontally (1 - f) |> scaleHorizontally f
+    in
+    ( left, right )

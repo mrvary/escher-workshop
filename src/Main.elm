@@ -30,6 +30,6 @@ main =
             createPicture fLetter
     in
     box
-        |> above f (above f (flip f))
+        |> above (besideExtra f f) (beside f f)
         |> toSvgWithBoxes ( 500, 500 ) []
         |> placeInsideDiv

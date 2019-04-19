@@ -1,4 +1,4 @@
-module Picture exposing (Picture, Rendering, above, aboveRatio, beside, besideRatio, blank, corner, flip, nonet, over, quartet, side, squareLimit, times, toss, ttile, turn, turns, utile)
+module Picture exposing (Picture, Rendering, above, aboveRatio, beside, besideExtra, besideRatio, besideRatioExtra, blank, corner, flip, nonet, over, quartet, side, squareLimit, times, toss, ttile, turn, turns, utile)
 
 import Box exposing (..)
 import Shape exposing (..)
@@ -91,12 +91,30 @@ above p1 p2 =
 
 besideRatio : Int -> Int -> Picture -> Picture -> Picture
 besideRatio m n p1 p2 =
-    blank
+    \box ->
+        let
+            f =
+                toFloat m / toFloat (m + n)
+
+            ( b1, b2 ) =
+                splitHorizontally f box
+        in
+        p1 b1 ++ p2 b2
+
+
+besideRatioExtra : Int -> Int -> Picture -> Picture -> Picture
+besideRatioExtra m n p1 p2 =
+    turn (aboveRatio 1 1 (turns 3 p1) (turns 3 p2))
 
 
 beside : Picture -> Picture -> Picture
 beside p1 p2 =
-    blank
+    besideRatioExtra 1 1 p1 p2
+
+
+besideExtra : Picture -> Picture -> Picture
+besideExtra p1 p2 =
+    besideRatioExtra 1 1 p1 p2
 
 
 
