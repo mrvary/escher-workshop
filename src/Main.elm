@@ -17,6 +17,36 @@ placeInsideDiv svg =
     div [ style "padding" "50px" ] [ svg ]
 
 
+g =
+    createPicture george
+
+
+f =
+    createPicture fLetter
+
+
+quartetGeorge =
+    let
+        ne =
+            flip (turnUpsideDown g)
+
+        se =
+            flip g
+
+        sw =
+            turnUpsideDown g
+    in
+    quartet g ne sw se
+
+
+quartetComposition =
+    let
+        inner =
+            quartet quartetGeorge blank blank quartetGeorge
+    in
+    quartet inner inner inner inner
+
+
 main : Svg msg
 main =
     let
@@ -25,11 +55,8 @@ main =
             , b = { x = 250.0, y = 0.0 }
             , c = { x = 0.0, y = 250.0 }
             }
-
-        f =
-            createPicture fLetter
     in
     box
-        |> above (besideExtra f f) (beside f f)
+        |> quartetComposition
         |> toSvgWithBoxes ( 500, 500 ) []
         |> placeInsideDiv

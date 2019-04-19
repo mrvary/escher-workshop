@@ -1,4 +1,4 @@
-module Picture exposing (Picture, Rendering, above, aboveRatio, beside, besideExtra, besideRatio, besideRatioExtra, blank, corner, flip, nonet, over, quartet, side, squareLimit, times, toss, ttile, turn, turns, utile)
+module Picture exposing (Picture, Rendering, above, aboveRatio, beside, besideExtra, besideRatio, besideRatioExtra, blank, corner, flip, nonet, over, quartet, side, squareLimit, times, toss, ttile, turn, turnUpsideDown, turns, utile)
 
 import Box exposing (..)
 import Shape exposing (..)
@@ -121,9 +121,14 @@ besideExtra p1 p2 =
 -- Exercise 6
 
 
+turnUpsideDown : Picture -> Picture
+turnUpsideDown p =
+    turns 2 p
+
+
 quartet : Picture -> Picture -> Picture -> Picture -> Picture
 quartet nw ne sw se =
-    blank
+    beside (above nw sw) (above ne se)
 
 
 
