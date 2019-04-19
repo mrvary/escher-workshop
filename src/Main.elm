@@ -25,6 +25,34 @@ f =
     createPicture fLetter
 
 
+e =
+    createPicture eLetter
+
+
+h =
+    createPicture hLetter
+
+
+n =
+    createPicture nLetter
+
+
+d =
+    createPicture dLetter
+
+
+r =
+    createPicture rLetter
+
+
+s =
+    createPicture sLetter
+
+
+o =
+    createPicture oLetter
+
+
 quartetGeorge =
     let
         ne =
@@ -57,6 +85,6 @@ main =
             }
     in
     box
-        |> quartetComposition
+        |> nonet h e n d (nonet h e n d (nonet h e n d e r s o n) r s o n) r s o n
         |> toSvgWithBoxes ( 500, 500 ) []
         |> placeInsideDiv

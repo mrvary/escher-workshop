@@ -1,4 +1,4 @@
-module Picture exposing (Picture, Rendering, above, aboveRatio, beside, besideExtra, besideRatio, besideRatioExtra, blank, corner, flip, nonet, over, quartet, side, squareLimit, times, toss, ttile, turn, turnUpsideDown, turns, utile)
+module Picture exposing (Picture, Rendering, above, aboveRatio, beside, besideExtra, besideRatio, besideRatioExtra, blank, corner, flip, nonet, over, quartet, side, squareLimit, times, toss, trioH, trioV, ttile, turn, turnUpsideDown, turns, utile)
 
 import Box exposing (..)
 import Shape exposing (..)
@@ -135,9 +135,19 @@ quartet nw ne sw se =
 -- Exercise 7
 
 
+trioH : Picture -> Picture -> Picture -> Picture
+trioH p1 p2 p3 =
+    besideRatio 1 2 (besideRatio 1 1 p1 p2) p3
+
+
+trioV : Picture -> Picture -> Picture -> Picture
+trioV p1 p2 p3 =
+    aboveRatio 2 1 (aboveRatio 1 1 p1 p2) p3
+
+
 nonet : Picture -> Picture -> Picture -> Picture -> Picture -> Picture -> Picture -> Picture -> Picture -> Picture
 nonet nw nm ne mw mm me sw sm se =
-    blank
+    trioV (trioH nw nm ne) (trioH mw mm me) (trioH sw sm se)
 
 
 
