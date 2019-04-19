@@ -93,9 +93,9 @@ splitHorizontally : Float -> Box -> ( Box, Box )
 splitHorizontally f box =
     let
         left =
-            box |> scaleHorizontally (1 - f)
+            box |> scaleHorizontally f
 
         right =
-            box |> moveHorizontally (1 - f) |> scaleHorizontally f
+            box |> moveHorizontally f |> scaleHorizontally (1 - f)
     in
     ( left, right )

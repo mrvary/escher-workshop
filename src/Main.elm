@@ -83,8 +83,11 @@ main =
             , b = { x = 250.0, y = 0.0 }
             , c = { x = 0.0, y = 250.0 }
             }
+
+        zoom p =
+            nonet h e n d p r s o n
     in
     box
-        |> nonet h e n d (nonet h e n d (nonet h e n d e r s o n) r s o n) r s o n
+        |> (nonet h e n d e r s o n |> zoom |> zoom)
         |> toSvgWithBoxes ( 500, 500 ) []
         |> placeInsideDiv
