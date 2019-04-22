@@ -180,12 +180,21 @@ ttile fish =
 
 utile : Picture -> Picture
 utile fish =
+    let
+        fishN =
+            fish |> toss |> flip
+
+        fishW =
+            turn fishN
+
+        fishS =
+            turn fishW
+
+        fishE =
+            turn fishS
+    in
     overall
-        [ fish |> toss |> flip
-        , fish |> toss |> flip |> times 3 turn
-        , fish |> toss |> flip |> turn
-        , fish |> toss |> flip |> times 2 turn
-        ]
+        [ fishN, fishW, fishS, fishE ]
 
 
 
@@ -198,11 +207,14 @@ side n fish =
         blank
 
     else
-        quartet
-            (side (n - 1) fish)
-            (side (n - 1) fish)
-            (fish |> ttile |> turn)
-            (ttile fish)
+        let
+            s =
+                side (n - 1) fish
+
+            t =
+                ttile fish
+        in
+        quartet s s (turn t) t
 
 
 
@@ -215,11 +227,14 @@ corner n fish =
         blank
 
     else
-        quartet
-            (corner (n - 1) fish)
-            (side (n - 1) fish)
-            (fish |> side (n - 1) |> turn)
-            (utile fish)
+        let
+            c =
+                corner (n - 1) fish
+
+            s =
+                side (n - 1) fish
+        in
+        quartet c s (turn s) (utile fish)
 
 
 
@@ -228,13 +243,38 @@ corner n fish =
 
 squareLimit : Int -> Picture -> Picture
 squareLimit n fish =
-    nonet
-        (corner n fish)
-        (side n fish)
-        (corner n fish |> times 3 turn)
-        (side n fish |> turn)
-        (utile fish)
-        (side n fish |> times 3 turn)
-        (corner n fish |> turn)
-        (side n fish |> times 2 turn)
-        (corner n fish |> times 2 turn)
+    let
+        c =
+            corner n fish
+
+        s =
+            side n fish
+
+        nw =
+            c
+
+        nm =
+            s
+
+        ne =
+            c |> turns 3
+
+        mw =
+            s |> turn
+
+        mm =
+            utile fish
+
+        me =
+            s |> turns 3
+
+        sw =
+            c |> turn
+
+        sm =
+            s |> turns 2
+
+        se =
+            c |> turns 2
+    in
+    nonet nw nm ne mw mm me sw sm se
