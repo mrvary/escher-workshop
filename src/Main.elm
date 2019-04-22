@@ -17,6 +17,10 @@ placeInsideDiv svg =
     div [ style "padding" "50px" ] [ svg ]
 
 
+fish =
+    createPicture fishShapes
+
+
 g =
     createPicture george
 
@@ -88,6 +92,6 @@ main =
             nonet h e n d p r s o n
     in
     box
-        |> (nonet h e n d e r s o n |> zoom |> zoom)
+        |> overall [ fish, fish |> turn |> turn, fish |> turn ]
         |> toSvgWithBoxes ( 500, 500 ) []
         |> placeInsideDiv

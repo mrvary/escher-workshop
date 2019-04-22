@@ -1,4 +1,4 @@
-module Picture exposing (Picture, Rendering, above, aboveRatio, beside, besideExtra, besideRatio, besideRatioExtra, blank, corner, flip, nonet, over, quartet, side, squareLimit, times, toss, ttile, turn, turnUpsideDown, turns, utile)
+module Picture exposing (Picture, Rendering, above, aboveRatio, beside, besideExtra, besideRatio, besideRatioExtra, blank, corner, flip, nonet, over, overall, quartet, side, squareLimit, times, toss, ttile, turn, turnUpsideDown, turns, utile)
 
 import Box exposing (..)
 import Shape exposing (..)
@@ -153,7 +153,12 @@ nonet nw nm ne mw mm me sw sm se =
 
 over : Picture -> Picture -> Picture
 over p1 p2 =
-    blank
+    \box -> p1 box ++ p2 box
+
+
+overall : List Picture -> Picture
+overall ps =
+    \box -> List.concatMap (\p -> p box) ps
 
 
 
