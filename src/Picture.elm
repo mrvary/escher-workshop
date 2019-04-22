@@ -194,7 +194,15 @@ utile fish =
 
 side : Int -> Picture -> Picture
 side n fish =
-    blank
+    if n == 0 then
+        blank
+
+    else
+        quartet
+            (side (n - 1) fish)
+            (side (n - 1) fish)
+            (fish |> ttile |> turn)
+            (ttile fish)
 
 
 
@@ -203,7 +211,15 @@ side n fish =
 
 corner : Int -> Picture -> Picture
 corner n fish =
-    blank
+    if n == 0 then
+        blank
+
+    else
+        quartet
+            (corner (n - 1) fish)
+            (side (n - 1) fish)
+            (fish |> side (n - 1) |> turn)
+            (utile fish)
 
 
 
@@ -212,4 +228,13 @@ corner n fish =
 
 squareLimit : Int -> Picture -> Picture
 squareLimit n fish =
-    blank
+    nonet
+        (corner n fish)
+        (side n fish)
+        (corner n fish |> times 3 turn)
+        (side n fish |> turn)
+        (utile fish)
+        (side n fish |> times 3 turn)
+        (corner n fish |> turn)
+        (side n fish |> times 2 turn)
+        (corner n fish |> times 2 turn)

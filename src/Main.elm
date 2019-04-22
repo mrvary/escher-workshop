@@ -92,6 +92,6 @@ main =
             nonet h e n d p r s o n
     in
     box
-        |> utile fish
+        |> squareLimit 5 fish
         |> toSvgWithBoxes ( 500, 500 ) []
         |> placeInsideDiv
