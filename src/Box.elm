@@ -34,8 +34,8 @@ tossBox : Box -> Box
 tossBox { a, b, c } =
     { a =
         add b c
-            |> add a
             |> scale 0.5
+            |> add a
     , b =
         add b c
             |> scale 0.5

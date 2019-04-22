@@ -167,7 +167,11 @@ overall ps =
 
 ttile : Picture -> Picture
 ttile fish =
-    blank
+    overall
+        [ fish
+        , fish |> toss |> flip
+        , fish |> toss |> flip |> times 3 turn
+        ]
 
 
 
@@ -176,7 +180,12 @@ ttile fish =
 
 utile : Picture -> Picture
 utile fish =
-    blank
+    overall
+        [ fish |> toss |> flip
+        , fish |> toss |> flip |> times 3 turn
+        , fish |> toss |> flip |> turn
+        , fish |> toss |> flip |> times 2 turn
+        ]
 
 
 

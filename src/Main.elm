@@ -92,6 +92,6 @@ main =
             nonet h e n d p r s o n
     in
     box
-        |> overall [ fish, fish |> turn |> turn, fish |> turn ]
+        |> utile fish
         |> toSvgWithBoxes ( 500, 500 ) []
         |> placeInsideDiv
